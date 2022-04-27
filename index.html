@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Etch-a-Sketch</title>
+</head>
+<body>
+    <h1>Etch your Sketch</h1>
+    <div class="setup">
+        
+        <!-- SECTION: USER INPUTS -->
+        <div class="inputs">
+            <!-- reset -->
+            <input type="button" value="Reset">
+            <!-- boz-size range slider -->
+            <input type="range" name="box-size" id="range-slider" min="10" max="50">
+            
+            <!-- color display -->
+            <div class="color-show"></div>
+            
+            
+            <!-- User Input Color Input Type Choice -->
+            <div>    
+                <!-- color name input -->
+                <p style="text-align: center; margin-bottom: 0;">Input Colors</p>
+                <div class="user-choice">
+                    <input type="radio" name="name" id="name-color"><p style="padding-right: 20px;">color-name</p>
+                    <!-- rgb input -->
+                    <input type="radio" name="rgb" id="rgb-color"><p>rgb</p>
+                </div>
+            </div>
+            
+            <!-- User Input Color Input -->
+            <div class="color-input">
+                <input type="text" name="color" id="color-input" style="display:none;">
+                <div id="rgb-input">
+                    <input type="text" name="color" id="r-input" style="display:none;">
+                    <input type="text" name="color" id="g-input" style="display:none;">
+                    <input type="text" name="color" id="b-input" style="display:none;">
+                </div>
+            </div>
+        </div>   
+        <div class="container">
+            <!-- fsd -->
+            afsd
+        </div>
+    </div>
+    <script src="./sketch.js" defer></script>
+</body>
+</html>
