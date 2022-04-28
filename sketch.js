@@ -10,6 +10,9 @@ let subGridWidth, subGridHeight;
 let timeout = false;
 let timeoutRange = false;
 
+// SECTION: Functions
+
+// ANCHOR: Creating Divs
 function createGridDivs(rangeSliderValue,container) {
 
     containerWidth = (window.getComputedStyle(container).width).replace('px','');
@@ -29,7 +32,9 @@ function createGridDivs(rangeSliderValue,container) {
     }
 }
 
+// ANCHOR: Resizing Divs
 function resizeResetDivs(event) {
+    // console.log(event.target.value)
     let divs = container.children;
     containerWidth = (window.getComputedStyle(container).width).replace('px','');
     containerHeight = (window.getComputedStyle(container).height).replace('px','');
@@ -43,11 +48,13 @@ function resizeResetDivs(event) {
         div.style.width = `${subGridWidth}px`;
         div.style.height =`${subGridHeight}px`;
         if(event.target.value === "Reset") {
-            div.style['background-color'] = 'none';
+            // console.log(div.style.backgroundColor);
+            div.style.backgroundColor = 'transparent';
         }
     }
 }
 
+// ANCHOR: ReArrange Divs on Slider
 function reArrangeDivs() {
     // ✅ REVIEW: Using innerText to remove all inner elements
     container.innerText = '';
@@ -74,6 +81,7 @@ function reArrangeDivs() {
     }
 }
 
+// ANCHOR: Display Boxes on Radio Button Change
 function displayBox(e) {
     inputColorChoice = e.target.value
 
@@ -89,6 +97,7 @@ function displayBox(e) {
     }
 }
 
+// ANCHOR: Color Hover Change
 function colorHover(e) {
     // ✅ REVIEW: How to use 
     // inputColorChoice = document.querySelector('input[name="color_input"]:checked').value;
@@ -108,11 +117,12 @@ function colorHover(e) {
     e.target.style.backgroundColor = "rgb(46, 53, 59)";
 }
 
-// SECTION: START
+// SECTION: CALLERS
+// ANCHOR: START
 // Compute Grids
 document.addEventListener('DOMContentLoaded',createGridDivs(rangeSlider.value, container));
 
-// SECTION: ON RESIZE & BUTTON CLICK & SLIDE CHANGE
+// ANCHOR: ON RESIZE & BUTTON CLICK & SLIDE CHANGE
 // // ✅ REVIEW: Learnt about Timeout
 // 1. Compute Grids on Resize of Window
 window.addEventListener('resize',function(event) {
@@ -142,7 +152,7 @@ for (let radio of radioButtons) {
     addEventListener('change', displayBox)
 }
 
-// SECTION: Change Color on Hover
+// ANCHOR: Change Color on Hover
 container.addEventListener('mouseenter', (e) => {
     for (const child of e.target.children) {
         child.addEventListener('mouseover', colorHover)
