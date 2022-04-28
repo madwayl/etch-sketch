@@ -24,13 +24,23 @@ h1 {
     gap: 1em;
 }
 
+/* Container Setup */
 .container {
-    border: 0.2rem solid black;
+    border: 2.5px solid black;
     margin: 0.5rem;
     height: 70vh;
     width: 50vw;
     max-width: 50vw;
     max-height: 50vw;
+    padding: 0px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+}
+
+/* Grid Setup */
+.grid {
+    background-color: red;
 }
 
 .color-show {
@@ -57,3 +67,10 @@ h1 {
     height: auto;
 }
 
+#range-slider {
+    height:2px;
+}
+
+#range-slider:hover {
+    opacity: 1;
+}
