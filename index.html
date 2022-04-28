@@ -16,18 +16,18 @@
             <!-- reset -->
             <input type="button" value="Reset" class="button">
             <!-- boz-size range slider -->
-            <input type="range" name="box-size" id="range-slider" min="10" max="50" value="20">
+            <input type="range" name="box-size" id="range-slider" min="4" max="64" value="4">
             
             <!-- color display -->
             <div class="color-show"></div>
             
             
-            <!-- User Input Color Input Type Choice -->
+            <!-- ANCHOR: User Input Color Input Type Choice -->
             <div>    
                 <!-- color name input -->
                 <p style="text-align: center">Input Colors</p>
                 <form class="user-choice">
-                    
+                    <!-- ✅ REVIEW: Using more Forms with same names for aligned input RADIO BUTTONS -->
                     <!-- Name Color Input -->
                     <input type="radio" id="name-color" name="color_input" value="Color Name">
                     <label for="name-color">Color Name</label>
@@ -43,7 +43,7 @@
 
             </div>
             
-            <!-- User Input Color Input -->
+            <!-- ANCHOR: User Input Color Input -->
             <div class="color-input" style="display:none;">
                 
                 <!-- Input Color Name -->
@@ -63,8 +63,7 @@
         </form>
         
         <!-- SECTION: Container Draw -->
-        <div class="container">
-        </div>
+        <div class="container"></div>
     </div>
     <script src="./sketch.js" defer></script>
 </body>

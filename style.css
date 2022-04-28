@@ -15,7 +15,6 @@ h1 {
     align-items: center;
     width: 100%;
     flex-wrap: wrap;
-    overflow: hidden;
 }
 
 .inputs {
@@ -42,6 +41,7 @@ h1 {
     background-color: red;
 }
 
+/* Round Color Display */
 .color-show {
     border: 0.1em solid black;
     width: 50px;
@@ -75,5 +75,5 @@ h1 {
 }
 
 .button {
-    
+
 }
