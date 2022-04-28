@@ -10,7 +10,7 @@ let subGridWidth, subGridHeight;
 let timeout = false;
 let timeoutRange = false;
 
-function createElementGrid(rangeSliderValue,container) {
+function createGridDivs(rangeSliderValue,container) {
 
     containerWidth = (window.getComputedStyle(container).width).replace('px','');
     containerHeight = (window.getComputedStyle(container).height).replace('px','');
@@ -74,9 +74,43 @@ function reArrangeDivs() {
     }
 }
 
+function displayBox(e) {
+    inputColorChoice = e.target.value
+
+    if (inputColorChoice === "Color Name") { 
+        document.querySelector('#ctext-input').style.display = "block";
+        document.querySelector('#rgb-input').style.display = "none";
+    } else if (inputColorChoice === "RGB Value") {
+        document.querySelector('#rgb-input').style.display = "block";
+        document.querySelector('#ctext-input').style.display = "none";
+    } else {
+        document.querySelector('#rgb-input').style.display = "none";
+        document.querySelector('#ctext-input').style.display = "none";
+    }
+}
+
+function colorHover(e) {
+    // ✅ REVIEW: How to use 
+    // inputColorChoice = document.querySelector('input[name="color_input"]:checked').value;
+    
+    // if (inputColorChoice === "Color Name") {    
+    //     inputColorText = document.querySelector('input[id="color-input"]');
+    // } else if (inputColorChoice === "RGB Value") {
+    //     r = document.querySelector('input[id="r-input"]');
+    //     g = document.querySelector('input[id="g-input"]');
+    //     b = document.querySelector('input[id="b-input"]');
+    //     inputColorText = `rgb(${r}, ${g}, ${b})`
+    // } else if (inputColorChoice === "Mouse Color") {
+    //     debugger;
+    //     inputColorText = `rgb(${e.OffsetX}, ${e.OffsetX}, ${e.OffsetX+e.OffsetY})`;
+    // } else { }
+    // console.log(e.target)
+    e.target.style.backgroundColor = "rgb(46, 53, 59)";
+}
+
 // SECTION: START
 // Compute Grids
-document.addEventListener('DOMContentLoaded',createElementGrid(rangeSlider.value, container));
+document.addEventListener('DOMContentLoaded',createGridDivs(rangeSlider.value, container));
 
 // SECTION: ON RESIZE & BUTTON CLICK & SLIDE CHANGE
 // // ✅ REVIEW: Learnt about Timeout
@@ -103,6 +137,14 @@ RangeSlider.addEventListener('input',function() {
     timeoutRange = setTimeout(reArrangeDivs, 80);
 })
 
-// for (const child of container.children) {
-//     child.addEventListener('hover',)
-// }
+radioButtons = document.querySelectorAll('input[name="color_input"]');
+for (let radio of radioButtons) { 
+    addEventListener('change', displayBox)
+}
+
+// SECTION: Change Color on Hover
+container.addEventListener('mouseenter', (e) => {
+    for (const child of e.target.children) {
+        child.addEventListener('mouseover', colorHover)
+    }
+});

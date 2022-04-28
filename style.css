@@ -38,7 +38,7 @@ h1 {
 
 /* Grid Setup */
 .grid {
-    background-color: red;
+    background-color: none;
 }
 
 /* Round Color Display */
@@ -66,6 +66,11 @@ h1 {
     height: auto;
 }
 
+.color-input {
+    display: flex;
+    flex-direction: column;
+}
+
 #range-slider {
     height:2px;
 }
@@ -74,6 +79,10 @@ h1 {
     opacity: 1;
 }
 
-.button {
+.rgb {
+    width: 30px;
+}
 
+.button {
+    
 }

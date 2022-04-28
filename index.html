@@ -23,41 +23,39 @@
             
             
             <!-- ANCHOR: User Input Color Input Type Choice -->
-            <div>    
-                <!-- color name input -->
-                <p style="text-align: center">Input Colors</p>
-                <form class="user-choice">
-                    <!-- ✅ REVIEW: Using more Forms with same names for aligned input RADIO BUTTONS -->
-                    <!-- Name Color Input -->
-                    <input type="radio" id="name-color" name="color_input" value="Color Name">
-                    <label for="name-color">Color Name</label>
+            <div class="user-choice">
+                <!-- ✅ REVIEW: Using more Forms with same names for aligned input RADIO BUTTONS -->
+                
+                <!-- Name Color Input -->
+                <input type="radio" id="name-color" name="color_input" value="Color Name">
+                <label for="name-color">Color Name</label>
 
-                    <!-- RGB Color Input -->
-                    <input type="radio" id="rgb-color" name="color_input" value="RGB Value">
-                    <label for="rgb-color">RGB Value</label>
+                <!-- RGB Color Input -->
+                <input type="radio" id="rgb-color" name="color_input" value="RGB Value">
+                <label for="rgb-color">RGB Value</label>
 
-                    <!-- Mouse Color Input -->
-                    <input type="radio" id="mouse-color" name="color_input" value="Color Mouse">
-                    <label for="mouse-color">Color Mouse</label>
-                </form>
-
+                <!-- Mouse Color Input -->
+                <input type="radio" id="mouse-color" name="color_input" value="Color Mouse">
+                <label for="mouse-color">Color Mouse</label>
             </div>
-            
+
             <!-- ANCHOR: User Input Color Input -->
-            <div class="color-input" style="display:none;">
+            <div class="color-input">
                 
                 <!-- Input Color Name -->
-                <label for="color-input">Input Color Name :</label>
-                <input type="text" name="color" id="color-input">
+                <div id="ctext-input" style="display:none;">
+                    <label for="color-text-input">Input Color Name :</label>
+                    <input type="text" name="color" id="color-text-input">
+                </div>
                 
                 <!-- Input RGB Color -->
                 <div id="rgb-input" style="display:none;">
                     <label for="r-input">R</label>
-                    <input type="text" name="r-input" id="r-input">
+                    <input type="text" name="r-input" id="r-input" class="rgb">
                     <label for="g-input">G</label>
-                    <input type="text" name="g-input" id="g-input">
+                    <input type="text" name="g-input" id="g-input" class="rgb">
                     <label for="b-input">B</label>
-                    <input type="text" name="b-input" id="b-input">
+                    <input type="text" name="b-input" id="b-input" class="rgb">
                 </div>
             </div>
         </form>
@@ -66,5 +64,6 @@
         <div class="container"></div>
     </div>
     <script src="./sketch.js" defer></script>
+    <script src="./minor.js" defer></script>
 </body>
 </html>
