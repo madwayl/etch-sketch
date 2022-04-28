@@ -1,37 +1,64 @@
 // Container Grid Calculation
 
 const container = document.querySelector('.container');
-let containerWidth = (window.getComputedStyle(container).width).replace('px','');
-let containerHeight = (window.getComputedStyle(container).height).replace('px','');
+let containerWidth, containerHeight;
 
 let rangeSlider = document.querySelector('input[type="range"]');
+let subGridWidth, subGridHeight;
 
-let subGridWidth = containerWidth / rangeSlider.value;
-let subGridHeight = containerHeight / rangeSlider.value;
+// Setting timeout for Window resize
+let timeout = false;
 
-function createElementGrid(rangeSlider,container) {
+function createElementGrid(rangeSliderValue,container) {
 
-    for (let i = 0; i < rangeSlider**2; i++ ) {
-        div = document.createElement('div');
-        div.classList.add('grid');
-        div.setAttribute('id',i);
-        div.style.setProperty('width', `${subGridWidth}px`);
-        div.style.setProperty('height', `${subGridHeight}px`);
-
-
-        container.appendChild(div);
-    }
-}
-
-function resizeDivs() {
     containerWidth = (window.getComputedStyle(container).width).replace('px','');
     containerHeight = (window.getComputedStyle(container).height).replace('px','');
 
     subGridWidth = containerWidth / rangeSlider.value;
     subGridHeight = containerHeight / rangeSlider.value;
 
-    div.style.setProperty('width', `${subGridWidth}px`);
-    div.style.setProperty('height', `${subGridHeight}px`);
+    for (let i = 0; i < rangeSliderValue**2; i++ ) {
+        div = document.createElement('div');
+        div.classList.add('grid');
+        div.setAttribute('id',i);
+        div.style.setProperty('width', `${subGridWidth}px`);
+        div.style.setProperty('height', `${subGridHeight}px`);
+
+        container.appendChild(div);
+    }
 }
 
-document.addEventListener('DOMContentLoaded',createElementGrid(rangeSlider, container));
+function resizeResetDivs(event) {
+    let divs = container.children;
+    containerWidth = (window.getComputedStyle(container).width).replace('px','');
+    containerHeight = (window.getComputedStyle(container).height).replace('px','');
+    console.log(containerHeight, containerHeight)
+
+    subGridWidth = containerWidth / rangeSlider.value;
+    subGridHeight = containerHeight / rangeSlider.value;
+
+    console.log(subGridHeight, subGridWidth)
+    for (let div of divs ) {
+        div.style.width = `${subGridWidth}px`;
+        div.style.height =`${subGridHeight}px`;
+        if(event.target.value === "Reset") {
+            div.style['background-color'] = 'white';
+        }
+    }
+}
+
+// Compute Grids
+document.addEventListener('DOMContentLoaded',createElementGrid(rangeSlider.value, container));
+
+// Compute Grids on Resize of Window
+window.addEventListener('resize',function(event) {
+    // clear the timeout
+    clearTimeout(timeout);
+    // start timing for event "completion"
+    timeout = setTimeout(resizeResetDivs(event), 100);
+});
+
+let ResetButton = document.querySelector('input[type="button"]')
+
+ResetButton.addEventListener('click',resizeResetDivs)
+

@@ -12,11 +12,11 @@
     <div class="setup">
         
         <!-- SECTION: USER INPUTS -->
-        <div class="inputs">
+        <form class="inputs">
             <!-- reset -->
-            <input type="button" value="Reset">
+            <input type="button" value="Reset" class="button">
             <!-- boz-size range slider -->
-            <input type="range" name="box-size" id="range-slider" min="10" max="50" value="10">
+            <input type="range" name="box-size" id="range-slider" min="10" max="50" value="20">
             
             <!-- color display -->
             <div class="color-show"></div>
@@ -25,24 +25,42 @@
             <!-- User Input Color Input Type Choice -->
             <div>    
                 <!-- color name input -->
-                <p style="text-align: center; margin-bottom: 0;">Input Colors</p>
-                <div class="user-choice">
-                    <input type="radio" name="name" id="name-color"><p style="padding-right: 20px;">color-name</p>
-                    <!-- rgb input -->
-                    <input type="radio" name="rgb" id="rgb-color"><p>rgb</p>
-                </div>
+                <p style="text-align: center">Input Colors</p>
+                <form class="user-choice">
+                    
+                    <!-- Name Color Input -->
+                    <input type="radio" id="name-color" name="color_input" value="Color Name">
+                    <label for="name-color">Color Name</label>
+
+                    <!-- RGB Color Input -->
+                    <input type="radio" id="rgb-color" name="color_input" value="RGB Value">
+                    <label for="rgb-color">RGB Value</label>
+
+                    <!-- Mouse Color Input -->
+                    <input type="radio" id="mouse-color" name="color_input" value="Color Mouse">
+                    <label for="mouse-color">Color Mouse</label>
+                </form>
+
             </div>
             
             <!-- User Input Color Input -->
-            <div class="color-input">
-                <input type="text" name="color" id="color-input" style="display:none;">
-                <div id="rgb-input">
-                    <input type="text" name="color" id="r-input" style="display:none;">
-                    <input type="text" name="color" id="g-input" style="display:none;">
-                    <input type="text" name="color" id="b-input" style="display:none;">
+            <div class="color-input" style="display:none;">
+                
+                <!-- Input Color Name -->
+                <label for="color-input">Input Color Name :</label>
+                <input type="text" name="color" id="color-input">
+                
+                <!-- Input RGB Color -->
+                <div id="rgb-input" style="display:none;">
+                    <label for="r-input">R</label>
+                    <input type="text" name="r-input" id="r-input">
+                    <label for="g-input">G</label>
+                    <input type="text" name="g-input" id="g-input">
+                    <label for="b-input">B</label>
+                    <input type="text" name="b-input" id="b-input">
                 </div>
             </div>
-        </div>   
+        </form>
         
         <!-- SECTION: Container Draw -->
         <div class="container">
