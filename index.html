@@ -14,38 +14,39 @@
         <!-- SECTION: USER INPUTS -->
         <form class="inputs">
             <!-- reset -->
-            <input type="button" value="Reset" class="button">
+            <input type="button" value="Clear Grid" class="button">
+            
             <!-- boz-size range slider -->
-            <input type="range" name="box-size" id="range-slider" min="4" max="64" value="4">
-            
-            <!-- color display -->
-            <div class="color-show"></div>
-            
-            
+            <div class="range-box">
+                <p id="range-slider-input"> 30 x 30</p>
+                <input type="range" name="box-size" id="range-slider" min="4" max="64" value="30">           
+            </div>
             <!-- ANCHOR: User Input Color Input Type Choice -->
             <div class="user-choice">
                 <!-- ✅ REVIEW: Using more Forms with same names for aligned input RADIO BUTTONS -->
+                <!-- ✅ REVIEW: Using Color Picker inside HTML -->
                 
                 <!-- Color Picker -->
-                <input type="radio" id="rgb-color" name="color_input" value="RGB Value">
-                <label for="rgb-color">Color Picker</label>
+                <div id="cpicker">
+                    <input type="color" name="color" id="color-picker-input" value="#2e353b">
+                    <label for="color-picker-input">Pen Color</label>
+                </div>
 
                 <!-- Mouse Color Input -->
-                <input type="radio" id="mouse-color" name="color_input" value="Color Mouse">
-                <label for="mouse-color">Color Mouse</label>
-            </div>
+                <div class="mouse-buttons">
+                    <input type="button" value="Rainbow Hover" class="button">
 
-            <!-- ANCHOR: User Input Color Input -->
-            <div id="cpicker-input" style="display:none;">
-                <input type="color" name="color" id="color-picker-input" value="#2e353b">
-            </div>
+                    <input type="button" value="GrayScale Hover" class="button">
 
+                    <input type="button" value="Eraser" class="button">
+                </div>  
+            </div>
+            
         </form>
         
         <!-- SECTION: Container Draw -->
         <div class="container"></div>
     </div>
     <script src="./sketch.js" defer></script>
-    <script src="./validation.js" defer></script>
 </body>
 </html>

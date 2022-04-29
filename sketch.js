@@ -3,26 +3,29 @@
 const container = document.querySelector('.container');
 let containerWidth, containerHeight;
 
-let rangeSlider = document.querySelector('input[type="range"]');
+let rangeSliderValue = document.querySelector('input[type="range"]').value;
+
+// Status Monitoring
+let singleColor = true, rainbow, grayScale, eraser;
+
+
+// Position Monitoring
+let mouseX, mouseY, isMouseDown;
 let subGridWidth, subGridHeight;
-
-let inputColorChoice, inputColorText = "#2e353b";
-
-let mouseX, mouseY;
 
 // Setting timeout for Window resize
 let timeout = false;
 let timeoutRange = false;
 
-// SECTION: Functions
+// SECTION: Functions 
 // ANCHOR: Creating Divs
 function createGridDivs(rangeSliderValue,container) {
 
     containerWidth = (window.getComputedStyle(container).width).replace('px','');
     containerHeight = (window.getComputedStyle(container).height).replace('px','');
 
-    subGridWidth = containerWidth / rangeSlider.value;
-    subGridHeight = containerHeight / rangeSlider.value;
+    subGridWidth = containerWidth / rangeSliderValue;
+    subGridHeight = containerHeight / rangeSliderValue;
 
     for (let i = 0; i < rangeSliderValue**2; i++ ) {
         div = document.createElement('div');
@@ -37,24 +40,28 @@ function createGridDivs(rangeSliderValue,container) {
 
 // ANCHOR: Resizing Divs
 function resizeResetDivs(event) {
-    // console.log(event.target.value)
+    // console.log(event.target)
     let divs = container.children;
     containerWidth = (window.getComputedStyle(container).width).replace('px','');
     containerHeight = (window.getComputedStyle(container).height).replace('px','');
     // console.log(containerHeight, containerHeight)
 
-    subGridWidth = containerWidth / rangeSlider.value;
-    subGridHeight = containerHeight / rangeSlider.value;
+    subGridWidth = containerWidth / rangeSliderValue;
+    subGridHeight = containerHeight / rangeSliderValue;
 
     // console.log(subGridHeight, subGridWidth)
     for (let div of divs ) {
         div.style.width = `${subGridWidth}px`;
         div.style.height =`${subGridHeight}px`;
-        if(event.target.value === "Reset") {
+        if(event.target.value === "Clear Grid") {
             // console.log(div.style.backgroundColor);
             div.style.backgroundColor = 'transparent';
         }
     }
+
+    eraser = false;
+    rainbow = false;
+    grayScale = false;
 }
 
 // ANCHOR: ReArrange Divs on Slider
@@ -64,14 +71,17 @@ function reArrangeDivs() {
 
     containerWidth = (window.getComputedStyle(container).width).replace('px','');
     containerHeight = (window.getComputedStyle(container).height).replace('px','');
+    
     // console.log(containerHeight, containerHeight)
 
-    rangeSliderValue = rangeSlider.value;
+    rangeSliderValue = document.querySelector('input[type="range"]').value;
 
-    subGridWidth = containerWidth / rangeSlider.value;
-    subGridHeight = containerHeight / rangeSlider.value;
+    document.querySelector('#range-slider-input').textContent = `${rangeSliderValue} x ${rangeSliderValue}`
 
-    console.log(subGridHeight, subGridWidth);
+    subGridWidth = containerWidth / rangeSliderValue;
+    subGridHeight = containerHeight / rangeSliderValue;
+
+    // console.log(subGridHeight, subGridWidth);
 
     for (let i = 0; i < rangeSliderValue**2; i++ ) {
         div = document.createElement('div');
@@ -84,37 +94,57 @@ function reArrangeDivs() {
     }
 }
 
-// ANCHOR: Display Boxes on Radio Button Change
-function displayBox(e) {
-    inputColorChoice = e.target.value
+// ANCHOR: Color Hover Change w.r.t. Status, for :
+// 1. Rainbow Hover
+// 2. GrayScale Hover
+// 3. Eraser Hover
 
-    // console.log(inputColorChoice, e.target);
-
-    if (inputColorChoice === "RGB Value") {
-        document.querySelector('#cpicker-input').style.display = "block";
-    } else if (inputColorChoice === "Color Mouse") {
-        document.querySelector('#cpicker-input').style.display = "none";
-    } else {}
-
-}
-
-// ANCHOR: Color Hover Change
 function colorHover(e) {
-    if (inputColorChoice === "RGB Value") {    
-        inputColorText = document.querySelector('input[id="color-picker-input"]').value;
-    } else if (inputColorChoice === "Color Mouse") {
+
+    // ✅ REVIEW: Adding another event together by Boolean values
+    // 1st Event : 'MouseOver'
+    // 2nd Event : function is allows only if 'MouseDown'
+    if (!isMouseDown) return;
+    
+    if (singleColor) {
+        e.target.style.backgroundColor = document.querySelector('input[id="color-picker-input"]').value;
+    }
+
+    if (rainbow) {
         let random = Math.floor(Math.random() * 255)
-        inputColorText = `rgb(${mouseX % 255}, ${mouseY % 255}, ${random % 255})`;
-        
-    } else { }
-    // console.log(inputColorText, inputColorChoice, e.target)
-    e.target.style.backgroundColor = inputColorText;
+        e.target.style.backgroundColor = `rgb(${mouseX % 255}, ${mouseY % 255}, ${random % 255})`;
+    } 
+
+    if (grayScale) {
+
+        let colorValue = e.target.style.backgroundColor.split(/[rgb(,)]/);
+        // debugger;
+
+        if (colorValue.length > 1) {
+            // console.log(e.target.style.backgroundColor);
+            // console.log(colorValue.length > 1);
+            
+            let color = parseInt(colorValue[5]) - 51;
+
+            if (color <= 0) color = 0;
+
+            e.target.style.backgroundColor = `rgb(${color},${color},${color}`;
+        } else {
+            e.target.style.backgroundColor = "#eeeeee";
+            // console.log(!colorValue)
+            // console.log(e.target.style.backgroundColor)
+        } 
+    }
+
+    if (eraser) {
+        e.target.style.backgroundColor = '#ffffff'
+    }
 }
 
 // SECTION: CALLERS
 // ANCHOR: START
 // Compute Grids
-document.addEventListener('DOMContentLoaded',createGridDivs(rangeSlider.value, container));
+document.addEventListener('DOMContentLoaded',createGridDivs(rangeSliderValue, container));
 
 // ANCHOR: ON RESIZE & BUTTON CLICK & SLIDE CHANGE
 // // ✅ REVIEW: Learnt about Timeout
@@ -128,39 +158,108 @@ window.addEventListener('resize',function(event) {
 
 
 // 2. RESET BUTTON CLICK
-let ResetButton = document.querySelector('input[type="button"]')
+let ResetButton = document.querySelector('input[value="Clear Grid"]')
 ResetButton.addEventListener('click',resizeResetDivs)
 
 // 3. RANGE SLIDE CHANGE
 // ✅ REVIEW: Adding more than 1 event as array with forEach
 let RangeSlider = document.querySelector('input[type="range"]')
-RangeSlider.addEventListener('input',function() {
+RangeSlider.addEventListener('input', function() {
     // clear the timeout
     clearTimeout(timeoutRange);
     // start timing for event "completion"
-    timeoutRange = setTimeout(reArrangeDivs, 80);
+    timeoutRange = setTimeout(reArrangeDivs, 0);
+});
+
+
+// SECTION: Random Button Color Generator
+// ANCHOR: Toggling Single Color
+colorPickButton = document.querySelector('#cpicker');
+colorPickButton.addEventListener('click', () => {
+    if (!singleColor) {
+        rainbow = false;
+        grayScale = false;
+        eraser = false;
+        singleColor = true;
+    }
+
 })
 
-// ANCHOR: Radio Button Input Change
-radioButtons = document.querySelectorAll('input[name="color_input"]');
-for (let radio of radioButtons) { 
-    radio.addEventListener('change', e => {
-        displayBox(e);
-        if (inputColorChoice === "Color Mouse") {
-            document.onmousemove = e => {
-                mouseX = e.pageX;
-                mouseY = e.pageY;
-            }
-        }
-        // console.log(mouseX,mouseY);
-    });
-}
 
+// ANCHOR: Toggling Rainbow
+rainbowButton = document.querySelector('input[value="Rainbow Hover"]');
+rainbowButton.addEventListener('click', () => {
+    if (!rainbow) {
+        rainbow = true;
+        grayScale = false;
+        eraser = false;
+        singleColor = false;
+    } else {
+        rainbow = false;
+        singleColor = true;
+    }
+    
+    rainbowButton.classList.toggle('active');
+    grayScaleButton.classList.toggle('active');
+    eraserButton.classList.toggle('active');
+
+    if (rainbow) {
+        document.onmousemove = e => {
+            mouseX = e.pageX;
+            mouseY = e.pageY;
+        }
+    }
+    // console.log(mouseX,mouseY);
+    // console.log(rainbow)
+});
+
+// ANCHOR: Toggling GrayScale
+grayScaleButton = document.querySelector('input[value="GrayScale Hover"]')
+grayScaleButton.addEventListener('click', () => {
+
+    if(!grayScale) {
+        grayScale = true;
+        rainbow = false;
+        eraser = false;
+    } else {
+        grayScale = false;
+        singleColor = true;
+    }
+    // console.log(grayScale)
+    grayScaleButton.classList.toggle('active');
+    rainbowButton.classList.toggle('active');
+    eraserButton.classList.toggle('active');
+
+});
+
+// ANCHOR: Toggling Eraser
+eraserButton = document.querySelector('input[value="Eraser"]')
+eraserButton.addEventListener('click', () => {
+
+    if(!eraser) {
+        grayScale = false;
+        rainbow = false;
+        eraser = true;
+        singleColor = false;
+    } else {
+        eraser = false;
+        singleColor = true;
+    }
+    grayScaleButton.classList.toggle('active');
+    rainbowButton.classList.toggle('active');
+    eraserButton.classList.toggle('active');
+
+});
+
+
+// SECTION: Color Change
 // ANCHOR: Change Color on Hover
-container.addEventListener('mouseenter', (e) => {
-    for (const child of e.target.children) {
-        child.addEventListener('mouseover', colorHover);
+container.addEventListener('mouseenter', () => {
+    for (const child of container.children) {
+        child.addEventListener('mouseover', colorHover, false);
     }
 });
 
+document.body.addEventListener("mousedown", function() {isMouseDown = true;}, false);
+document.body.addEventListener("mouseup", function() {isMouseDown = false;}, false);
 

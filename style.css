@@ -1,4 +1,6 @@
 
+
+
 body {
     margin: 0;
 }
@@ -17,13 +19,7 @@ h1 {
     flex-wrap: wrap;
 }
 
-.inputs {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1em;
-}
-
+/* SECTION: Grid Container */
 /* Container Setup */
 .container {
     border: 2.5px solid black;
@@ -34,54 +30,63 @@ h1 {
     max-height: 50vw;
     display: flex;
     flex-wrap: wrap;
+
 }
 
 /* Grid Setup */
 .grid {
-    background-color: none;
+    background-color: #ffffff;
 }
 
-/* Round Color Display */
-.color-show {
-    border: 0.1em solid black;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: #2e353b;
+/* SECTION: Color Input Section */
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 1em;
+    height: 100%;
+    width: auto;
+}
+
+.range-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .user-choice {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    gap: 10px;
+    gap: 1em;
+}
+
+#cpicker {
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
 #color-picker-input {
-    border-radius: 2px;
-    border: 1.5px solid gray;
-    background-color: whitesmoke;
+    border: transparent;
+    background-color: transparent;
     width: 60px;
-    height: 30px;
+    height: 60px;
 }
 
 #color-picker-input:hover {
-    border: 1.7px solid black;
-    background-color: gray;
+    border: 1.7px solid transparent;
+    background-color: transparent;
 }
 
 #range-slider {
     height:2px;
+    margin: 10px;
 }
 
 #range-slider:hover {
     opacity: 1;
-}
-
-.rgb {
-    width: 30px;
-}
-
-.button {
-    
 }
