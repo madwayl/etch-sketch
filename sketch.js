@@ -6,12 +6,15 @@ let containerWidth, containerHeight;
 let rangeSlider = document.querySelector('input[type="range"]');
 let subGridWidth, subGridHeight;
 
+let inputColorChoice, inputColorText = "#2e353b";
+
+let mouseX, mouseY;
+
 // Setting timeout for Window resize
 let timeout = false;
 let timeoutRange = false;
 
 // SECTION: Functions
-
 // ANCHOR: Creating Divs
 function createGridDivs(rangeSliderValue,container) {
 
@@ -43,7 +46,7 @@ function resizeResetDivs(event) {
     subGridWidth = containerWidth / rangeSlider.value;
     subGridHeight = containerHeight / rangeSlider.value;
 
-    console.log(subGridHeight, subGridWidth)
+    // console.log(subGridHeight, subGridWidth)
     for (let div of divs ) {
         div.style.width = `${subGridWidth}px`;
         div.style.height =`${subGridHeight}px`;
@@ -85,36 +88,27 @@ function reArrangeDivs() {
 function displayBox(e) {
     inputColorChoice = e.target.value
 
-    if (inputColorChoice === "Color Name") { 
-        document.querySelector('#ctext-input').style.display = "block";
-        document.querySelector('#rgb-input').style.display = "none";
-    } else if (inputColorChoice === "RGB Value") {
-        document.querySelector('#rgb-input').style.display = "block";
-        document.querySelector('#ctext-input').style.display = "none";
-    } else {
-        document.querySelector('#rgb-input').style.display = "none";
-        document.querySelector('#ctext-input').style.display = "none";
-    }
+    // console.log(inputColorChoice, e.target);
+
+    if (inputColorChoice === "RGB Value") {
+        document.querySelector('#cpicker-input').style.display = "block";
+    } else if (inputColorChoice === "Color Mouse") {
+        document.querySelector('#cpicker-input').style.display = "none";
+    } else {}
+
 }
 
 // ANCHOR: Color Hover Change
 function colorHover(e) {
-    // ✅ REVIEW: How to use 
-    // inputColorChoice = document.querySelector('input[name="color_input"]:checked').value;
-    
-    // if (inputColorChoice === "Color Name") {    
-    //     inputColorText = document.querySelector('input[id="color-input"]');
-    // } else if (inputColorChoice === "RGB Value") {
-    //     r = document.querySelector('input[id="r-input"]');
-    //     g = document.querySelector('input[id="g-input"]');
-    //     b = document.querySelector('input[id="b-input"]');
-    //     inputColorText = `rgb(${r}, ${g}, ${b})`
-    // } else if (inputColorChoice === "Mouse Color") {
-    //     debugger;
-    //     inputColorText = `rgb(${e.OffsetX}, ${e.OffsetX}, ${e.OffsetX+e.OffsetY})`;
-    // } else { }
-    // console.log(e.target)
-    e.target.style.backgroundColor = "rgb(46, 53, 59)";
+    if (inputColorChoice === "RGB Value") {    
+        inputColorText = document.querySelector('input[id="color-picker-input"]').value;
+    } else if (inputColorChoice === "Color Mouse") {
+        let random = Math.floor(Math.random() * 255)
+        inputColorText = `rgb(${mouseX % 255}, ${mouseY % 255}, ${random % 255})`;
+        
+    } else { }
+    // console.log(inputColorText, inputColorChoice, e.target)
+    e.target.style.backgroundColor = inputColorText;
 }
 
 // SECTION: CALLERS
@@ -147,14 +141,26 @@ RangeSlider.addEventListener('input',function() {
     timeoutRange = setTimeout(reArrangeDivs, 80);
 })
 
+// ANCHOR: Radio Button Input Change
 radioButtons = document.querySelectorAll('input[name="color_input"]');
 for (let radio of radioButtons) { 
-    addEventListener('change', displayBox)
+    radio.addEventListener('change', e => {
+        displayBox(e);
+        if (inputColorChoice === "Color Mouse") {
+            document.onmousemove = e => {
+                mouseX = e.pageX;
+                mouseY = e.pageY;
+            }
+        }
+        // console.log(mouseX,mouseY);
+    });
 }
 
 // ANCHOR: Change Color on Hover
 container.addEventListener('mouseenter', (e) => {
     for (const child of e.target.children) {
-        child.addEventListener('mouseover', colorHover)
+        child.addEventListener('mouseover', colorHover);
     }
 });
+
+
