@@ -137,7 +137,7 @@ function colorHover(e) {
     }
 
     if (eraser) {
-        e.target.style.backgroundColor = '#ffffff'
+        e.target.style.backgroundColor = 'transparent'
     }
 }
 
@@ -183,6 +183,11 @@ colorPickButton.addEventListener('click', () => {
         singleColor = true;
     }
 
+    grayScaleButton.classList.remove('active');
+    eraserButton.classList.remove('active');
+    rainbowButton.classList.remove('active');
+
+
 })
 
 
@@ -194,14 +199,15 @@ rainbowButton.addEventListener('click', () => {
         grayScale = false;
         eraser = false;
         singleColor = false;
+        grayScaleButton.classList.remove('active');
+        eraserButton.classList.remove('active');
     } else {
         rainbow = false;
         singleColor = true;
     }
     
     rainbowButton.classList.toggle('active');
-    grayScaleButton.classList.toggle('active');
-    eraserButton.classList.toggle('active');
+    
 
     if (rainbow) {
         document.onmousemove = e => {
@@ -221,15 +227,16 @@ grayScaleButton.addEventListener('click', () => {
         grayScale = true;
         rainbow = false;
         eraser = false;
+        singleColor = false;
+        rainbowButton.classList.remove('active');
+        eraserButton.classList.remove('active');
     } else {
         grayScale = false;
         singleColor = true;
     }
     // console.log(grayScale)
     grayScaleButton.classList.toggle('active');
-    rainbowButton.classList.toggle('active');
-    eraserButton.classList.toggle('active');
-
+    
 });
 
 // ANCHOR: Toggling Eraser
@@ -241,12 +248,13 @@ eraserButton.addEventListener('click', () => {
         rainbow = false;
         eraser = true;
         singleColor = false;
+        grayScaleButton.classList.remove('active');
+        rainbowButton.classList.remove('active');
     } else {
         eraser = false;
         singleColor = true;
     }
-    grayScaleButton.classList.toggle('active');
-    rainbowButton.classList.toggle('active');
+    
     eraserButton.classList.toggle('active');
 
 });

@@ -1,13 +1,39 @@
 
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
+:root {
+    /* Primary Colors */
+    --light :#ECE6C2;
+    --dark: #6F5643;
+    --red: #CC6B49;
+    --yellow: #D2A24C;
+    --blue: #73BDA8;
+}
+
+* {
+    font-family: 'VT323', cursive;
+    font-size: 30px;
+    text-align: center;
+}
 
 body {
     margin: 0;
+    background-color: var(--light);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 h1 {
     text-align: center;
-    padding-bottom: 2rem;
+    color: var(--yellow);
+    font-size: 60px;
+    font-weight: 700;
+    background-color: var(--dark);
+    margin: 0;
+    padding: 20px;
+    border-bottom: 10px solid var(--yellow);
+    margin-bottom: 12px;
 }
 
 .setup {
@@ -15,6 +41,7 @@ h1 {
     justify-content: center;
     gap: 4em;
     align-items: center;
+    align-content: center;
     width: 100%;
     flex-wrap: wrap;
 }
@@ -22,7 +49,7 @@ h1 {
 /* SECTION: Grid Container */
 /* Container Setup */
 .container {
-    border: 2.5px solid black;
+    border: 3.5px solid black;
     margin: 5px;
     height: 80vh;
     width: 50vw;
@@ -30,12 +57,12 @@ h1 {
     max-height: 50vw;
     display: flex;
     flex-wrap: wrap;
-
+    background-color: var(--light);
 }
 
 /* Grid Setup */
 .grid {
-    background-color: #ffffff;
+    background-color: transparent;
 }
 
 /* SECTION: Color Input Section */
@@ -47,7 +74,7 @@ h1 {
     justify-content: space-evenly;
     gap: 1em;
     height: 100%;
-    width: auto;
+    width: 20%;
 }
 
 .range-box {
@@ -62,12 +89,16 @@ h1 {
     justify-content: space-between;
     align-items: center;
     gap: 1em;
+    width: 100%;
 }
 
+/* ANCHOR: Color Picker */
 #cpicker {
     display: flex;
     align-items: center;
-    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
 }
 
 #color-picker-input {
@@ -82,6 +113,8 @@ h1 {
     background-color: transparent;
 }
 
+/* ANCHOR: Range Slider */
+
 #range-slider {
     height:2px;
     margin: 10px;
@@ -90,3 +123,35 @@ h1 {
 #range-slider:hover {
     opacity: 1;
 }
+
+
+/* ANCHOR: Mouse Status Buttons */
+.mouse-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    padding: 10px 0px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.button {
+    width: 90%;
+    height: auto;
+    color: var(--light);
+    padding: 10px;
+    background-color: var(--blue);
+    border: 2.5px solid black;
+}
+
+.button:hover {
+    color: var(--red);
+    background-color: var(--yellow);
+}
+
+.button:active, .active {
+    color: var(--dark);
+    background-color: var(--yellow);
+}
+
