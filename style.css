@@ -21,6 +21,7 @@ body {
     background-color: var(--light);
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: center;
 }
 
@@ -31,38 +32,40 @@ h1 {
     font-weight: 700;
     background-color: var(--dark);
     margin: 0;
-    padding: 20px;
+    padding: 20px 0px;
     border-bottom: 10px solid var(--yellow);
     margin-bottom: 12px;
+    width: 100%;
 }
 
 .setup {
     display: flex;
     justify-content: center;
-    gap: 4em;
+    gap: 1em;
     align-items: center;
-    align-content: center;
-    width: 100%;
+    width: fit-content;
     flex-wrap: wrap;
+    flex: 1;
 }
 
 /* SECTION: Grid Container */
 /* Container Setup */
 .container {
     border: 3.5px solid black;
-    margin: 5px;
-    height: 80vh;
-    width: 50vw;
-    max-width: 50vw;
-    max-height: 50vw;
+    margin: 0px 30px;
+    height: 600px;
+    width: 600px;
+    max-width: 100vh;
+    max-height: 100vh;
     display: flex;
     flex-wrap: wrap;
     background-color: var(--light);
+    flex: 2 1 auto;
 }
 
 /* Grid Setup */
 .grid {
-    background-color: transparent;
+    background-color: rgba(200,200,200,0);
 }
 
 /* SECTION: Color Input Section */
@@ -71,10 +74,12 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
     gap: 1em;
     height: 100%;
     width: 20%;
+    flex: 1 3 auto;
+    margin: 0px 30px;
 }
 
 .range-box {
@@ -89,7 +94,7 @@ h1 {
     justify-content: space-between;
     align-items: center;
     gap: 1em;
-    width: 100%;
+    flex: 1;
 }
 
 /* ANCHOR: Color Picker */
@@ -137,7 +142,8 @@ h1 {
 }
 
 .button {
-    width: 90%;
+    width: fit-content;
+    max-width: fit-content;
     height: auto;
     color: var(--light);
     padding: 10px;

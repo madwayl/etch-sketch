@@ -33,6 +33,7 @@ function createGridDivs(rangeSliderValue,container) {
         div.setAttribute('id',i);
         div.style.setProperty('width', `${subGridWidth}px`);
         div.style.setProperty('height', `${subGridHeight}px`);
+        div.style.setProperty('background-color','rgba(200,200,200,0)')
 
         container.appendChild(div);
     }
@@ -55,13 +56,19 @@ function resizeResetDivs(event) {
         div.style.height =`${subGridHeight}px`;
         if(event.target.value === "Clear Grid") {
             // console.log(div.style.backgroundColor);
-            div.style.backgroundColor = 'transparent';
+            div.style.setProperty('background-color','rgba(200,200,200,0)');
         }
     }
 
+    // Disable all and Enable Single Color Options, upon cleaning
     eraser = false;
     rainbow = false;
     grayScale = false;
+    singleColor = true;
+
+    grayScaleButton.classList.remove('active');
+    eraserButton.classList.remove('active');
+    rainbowButton.classList.remove('active');
 }
 
 // ANCHOR: ReArrange Divs on Slider
@@ -101,9 +108,10 @@ function reArrangeDivs() {
 
 function colorHover(e) {
 
+
     // ✅ REVIEW: Adding another event together by Boolean values
     // 1st Event : 'MouseOver'
-    // 2nd Event : function is allows only if 'MouseDown'
+    // 2nd Event : function allows only if 'MouseDown'
     if (!isMouseDown) return;
     
     if (singleColor) {
@@ -112,32 +120,26 @@ function colorHover(e) {
 
     if (rainbow) {
         let random = Math.floor(Math.random() * 255)
-        e.target.style.backgroundColor = `rgb(${mouseX % 255}, ${mouseY % 255}, ${random % 255})`;
+        e.target.style.backgroundColor = `rgb(${mouseX % 255}, ${mouseY % 255}, ${random % 255}, 1)`;
     } 
 
     if (grayScale) {
 
-        let colorValue = e.target.style.backgroundColor.split(/[rgb(,)]/);
         // debugger;
+        let colorValue = e.target.style.backgroundColor.split(/[rgb(,)]/);
 
-        if (colorValue.length > 1) {
-            // console.log(e.target.style.backgroundColor);
-            // console.log(colorValue.length > 1);
-            
-            let color = parseInt(colorValue[5]) - 51;
+        let color = parseInt(colorValue[5]) - 51;
+        let transparent = parseFloat(colorValue[7]) + 0.250;
 
-            if (color <= 0) color = 0;
+        if (color <= 0) color = 0;
+        if (transparent > 1) transparent = 1;
 
-            e.target.style.backgroundColor = `rgb(${color},${color},${color}`;
-        } else {
-            e.target.style.backgroundColor = "#eeeeee";
-            // console.log(!colorValue)
-            // console.log(e.target.style.backgroundColor)
-        } 
+        e.target.style.backgroundColor = `rgb(${color},${color},${color},${transparent})`;
+
     }
 
     if (eraser) {
-        e.target.style.backgroundColor = 'transparent'
+        e.target.style.backgroundColor = 'rgba(200,200,200,0)'
     }
 }
 
@@ -268,6 +270,7 @@ container.addEventListener('mouseenter', () => {
     }
 });
 
+// Check on Mouse Down Event to fill up 'isMouseDown'
 document.body.addEventListener("mousedown", function() {isMouseDown = true;}, false);
 document.body.addEventListener("mouseup", function() {isMouseDown = false;}, false);
 
