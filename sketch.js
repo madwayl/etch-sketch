@@ -115,7 +115,7 @@ function colorHover(e) {
     if (!isMouseDown) return;
     
     if (singleColor) {
-        e.target.style.backgroundColor = document.querySelector('input[id="color-picker-input"]').value;
+        e.target.style.backgroundColor = `${document.querySelector('input[id="color-picker-input"]').value}FF`;
     }
 
     if (rainbow) {
@@ -126,14 +126,17 @@ function colorHover(e) {
     if (grayScale) {
 
         // debugger;
+        // ✅ REVIEW: Always use rgba() everywhere - include transparency
         let colorValue = e.target.style.backgroundColor.split(/[rgb(,)]/);
-
+        // console.log(e.target.style.backgroundColor)
+        // console.log(Boolean(colorValue[7]))
         let color = parseInt(colorValue[5]) - 51;
-        let transparent = parseFloat(colorValue[7]) + 0.250;
+        let transparent = (colorValue[7] ? parseFloat(colorValue[7]) : 1) + 0.250;
 
         if (color <= 0) color = 0;
         if (transparent > 1) transparent = 1;
 
+        // console.log(`Updated Value : rgb(${color},${color},${color},${transparent})`)
         e.target.style.backgroundColor = `rgb(${color},${color},${color},${transparent})`;
 
     }
