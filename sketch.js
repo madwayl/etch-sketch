@@ -17,10 +17,11 @@ let subGridWidth, subGridHeight;
 let timeout = false;
 let timeoutRange = false;
 
-// SECTION: Functions 
+// SECTION: Prime Functions 
 // ANCHOR: Creating Divs
 function createGridDivs(rangeSliderValue,container) {
 
+    // REVIEW: Usage of `getComputedStyle` to get the necessary computed information than other methods
     containerWidth = (window.getComputedStyle(container).width).replace('px','');
     containerHeight = (window.getComputedStyle(container).height).replace('px','');
 
@@ -101,6 +102,7 @@ function reArrangeDivs() {
     }
 }
 
+// SECTION: Draw on Div + Note Color Changes on Button Click
 // ANCHOR: Color Hover Change w.r.t. Status, for :
 // 1. Rainbow Hover
 // 2. GrayScale Hover
@@ -145,16 +147,19 @@ function colorHover(e) {
         e.target.style.backgroundColor = 'rgba(200,200,200,0)'
     }
 }
+// !SECTION
+// !SECTION
 
-// SECTION: CALLERS
+// SECTION: FUNCTION CALLERS
 // ANCHOR: START
 // Compute Grids
 document.addEventListener('DOMContentLoaded',createGridDivs(rangeSliderValue, container));
 
 // ANCHOR: ON RESIZE & BUTTON CLICK & SLIDE CHANGE
-// // ✅ REVIEW: Learnt about Timeout
+
 // 1. Compute Grids on Resize of Window
 window.addEventListener('resize',function(event) {
+    // // ✅ REVIEW: Learnt about Timeout
     // clear the timeout
     clearTimeout(timeout);
     // start timing for event "completion"
@@ -175,9 +180,10 @@ RangeSlider.addEventListener('input', function() {
     // start timing for event "completion"
     timeoutRange = setTimeout(reArrangeDivs, 0);
 });
+// !SECTION
 
 
-// SECTION: Random Button Color Generator
+// SECTION: Change Color Generator on Button Click
 // ANCHOR: Toggling Single Color
 colorPickButton = document.querySelector('#cpicker');
 colorPickButton.addEventListener('click', () => {
@@ -263,7 +269,7 @@ eraserButton.addEventListener('click', () => {
     eraserButton.classList.toggle('active');
 
 });
-
+// !SECTION
 
 // SECTION: Color Change
 // ANCHOR: Change Color on Hover
@@ -272,6 +278,7 @@ container.addEventListener('mouseenter', () => {
         child.addEventListener('mouseover', colorHover, false);
     }
 });
+// !SECTION
 
 // Check on Mouse Down Event to fill up 'isMouseDown'
 document.body.addEventListener("mousedown", function() {isMouseDown = true;}, false);
