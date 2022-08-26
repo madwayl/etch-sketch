@@ -18,6 +18,7 @@
 
 body {
     margin: 0;
+    min-height: 100vh;
     background-color: var(--light);
     display: flex;
     flex-direction: column;
@@ -55,8 +56,8 @@ h1 {
     margin: 0px 30px;
     height: 600px;
     width: 600px;
-    max-width: 100vh;
-    max-height: 100vh;
+    max-width: 80vh;
+    max-height: 80vh;
     display: flex;
     flex-wrap: wrap;
     background-color: var(--light);
