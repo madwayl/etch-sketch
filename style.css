@@ -1,9 +1,8 @@
-
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
 :root {
     /* Primary Colors */
-    --light :#ECE6C2;
+    --light: #ECE6C2;
     --dark: #6F5643;
     --red: #CC6B49;
     --yellow: #D2A24C;
@@ -14,6 +13,7 @@
     font-family: 'VT323', cursive;
     font-size: 30px;
     text-align: center;
+    /* outline: 1px solid red; */
 }
 
 body {
@@ -58,15 +58,16 @@ h1 {
     width: 600px;
     max-width: 80vh;
     max-height: 80vh;
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    /* flex-wrap: wrap; */
     background-color: var(--light);
-    flex: 2 1 auto;
+    /* grid: repeat(30, 1fr) / repeat(30, 1fr) */
+    /* flex: 2 1 auto; */
 }
 
 /* Grid Setup */
 .grid {
-    background-color: rgba(200,200,200,0);
+    background-color: rgba(200, 200, 200, 0);
 }
 
 /* SECTION: Color Input Section */
@@ -122,7 +123,7 @@ h1 {
 /* ANCHOR: Range Slider */
 
 #range-slider {
-    height:2px;
+    height: 2px;
     margin: 10px;
 }
 
@@ -157,8 +158,8 @@ h1 {
     background-color: var(--yellow);
 }
 
-.button:active, .active {
+.button:active,
+.active {
     color: var(--dark);
     background-color: var(--yellow);
 }
-

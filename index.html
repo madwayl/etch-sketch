@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,25 +9,26 @@
     <link rel="shortcut icon" href="./etch-a-sketch.png" type="image/x-icon">
     <title>Etch-a-Sketch</title>
 </head>
+
 <body>
     <h1>Etch your Sketch</h1>
     <div class="setup">
-        
+
         <!-- SECTION: USER INPUTS -->
         <form class="inputs">
             <!-- reset -->
             <input type="button" value="Clear Grid" class="button">
-            
+
             <!-- boz-size range slider -->
             <div class="range-box">
                 <p id="range-slider-input"> 30 x 30</p>
-                <input type="range" name="box-size" id="range-slider" min="4" max="64" value="20">           
+                <input type="range" name="box-size" id="range-slider" min="4" max="64" value="20">
             </div>
             <!-- ANCHOR: User Input Color Input Type Choice -->
             <div class="user-choice">
                 <!-- ✅ REVIEW: Using more Forms with same names for aligned input RADIO BUTTONS -->
                 <!-- ✅ REVIEW: Using Color Picker inside HTML -->
-                
+
                 <!-- Color Picker -->
                 <div id="cpicker">
                     <input type="color" name="color" id="color-picker-input" value="#2E353B">
@@ -40,14 +42,17 @@
                     <input type="button" value="GrayScale Hover" class="button">
 
                     <input type="button" value="Eraser" class="button">
-                </div>  
+
+                    <input type="button" value="Paint" class="button">
+                </div>
             </div>
-            
+
         </form>
-        
+
         <!-- SECTION: Container Draw -->
         <div class="container"></div>
     </div>
     <script src="./sketch.js"></script>
 </body>
+
 </html>
